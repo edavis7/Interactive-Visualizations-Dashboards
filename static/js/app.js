@@ -3,7 +3,8 @@ function buildMetadata(sample) {
   // @TODO: Complete the following function that builds the metadata panel
 
   // Use `d3.json` to fetch the metadata for a sample
-  var metadataurl = '/metadata/${sample}';
+  var metadataurl = `/metadata/${sample}`;
+    console.log(metadataurl)
   d3.json(metadataurl).then((sample) => {
 
     // Use d3 to select the panel with id of `#sample-metadata`
@@ -17,7 +18,7 @@ function buildMetadata(sample) {
     // tags for each key-value in the metadata.
     Object.entries(sample).forEach(([key, value]) => {
       var row = sample_metadata.append('p');
-      row.text('${key}: ${value}');
+      row.text(`${key}: ${value}`);
     });
   })
 };
@@ -25,7 +26,7 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
-  var url = '/samples/${sample}';
+  var url = `/samples/${sample}`;
   d3.json(url).then((data) => {
 
     // @TODO: Build a Bubble Chart using the sample data
@@ -54,7 +55,8 @@ function buildCharts(sample) {
     var data = [trace_bubble];
 
     var layout = {
-      xaxis: { title: "OTU ID" }
+      xaxis: { title: "OTU ID" },
+      margin: { t: 0 },
     };
 
     Plotly.newPlot("bubble", data, layout);
